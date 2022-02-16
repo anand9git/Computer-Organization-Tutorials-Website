@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COVID 19</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		  <a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row" style="background-image: url('covidbkg2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+    <div>
+      <h1 style="padding-left: 380px; padding-top: 30px; color: white">COVID - 19 Stats</h1>
+    </div>
+		<div class="content">
+      <div class="container" style="padding-left: 160px;">
+        <h1 style="color: white; padding-left: 100px;"class="text-center mt-5" >India - Covid 19 Live tracker</h1>
+        <br><br>
+        <div style="padding-left: 50px; width: 700px; table-layout: auto;">
+        <table class="table table-hover" style="background-color: #bfbfbf;">
+          <thead>
+            <tr>
+              <th>Total Cases</th>
+              <th>Total Deaths</th>
+              <th>Total Recovered</th>
+            </tr>            
+          </thead>
+          <tbody>
+            <tr id="data">
+            </tr>
+          </tbody>
+        </table>
+        <button onclick="refreshData()" class="btn btn-danger btn-block">
+          Refresh Data
+        </button>
+        <hr style="border-width: 20px; border-color: black;">
+        <table class="table table-hover" style="background-color: #bfbfbf;">
+          <thead>
+            <tr>
+              <th>Cases in last 24 hours</th>
+              <th>Deaths in last 24 hours</th>
+              <th>Recovered in last 24 hours</th>
+            </tr>            
+          </thead>
+          <tbody>
+            <tr id="data3">
+            </tr>
+          </tbody>
+        </table>
+        <button onclick="refreshData3()" class="btn btn-danger btn-block">
+          Refresh Data
+        </button>
+        <hr style="border-width: 20px; border-color: black;">
+      </div>
+      <br><br>
+      <h1 style="color: white; padding-left: 100px;"class="text-center mt-5">World - Covid 19 Live tracker</h1>
+        <br><br>
+        <div style="padding-left: 50px; width: 700px; table-layout: auto;">
+        <table class="table table-hover" style="background-color: #bfbfbf;">
+          <thead>
+            <tr>
+              <th>Total Cases</th>
+              <th>Total Deaths</th>
+              <th>Total Recovered</th>
+            </tr>            
+          </thead>
+          <tbody>
+            <tr id="data2">
+            </tr>
+          </tbody>
+        </table>
+        <button onclick="refreshData2()" class="btn btn-danger btn-block">
+          Refresh Data
+        </button>
+        <hr style="border-width: 20px; border-color: black;">
+        <table class="table table-hover" style="background-color: #bfbfbf;">
+          <thead>
+            <tr>
+              <th>Cases in last 24 hrs</th>
+              <th>Deaths in last 24 hrs</th>
+              <th>Recovered in last 24 hrs</th>
+            </tr>            
+          </thead>
+          <tbody>
+            <tr id="data4">
+            </tr>
+          </tbody>
+        </table>
+        <button onclick="refreshData4()" class="btn btn-danger btn-block">
+          Refresh Data
+        </button>
+        <hr style="border-width: 20px; border-color: black;">
+      </div>
+      </div>
+		</div>
+	</div>
+	<footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top: 10px; text-align: left;">Reach us</h4>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+      window.onscroll = function() {myFunction()};
+
+      var navbarc = document.getElementById("navbarc");
+      var sticky = navbarc.offsetTop;
+
+      function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbarc.classList.add("sticky")
+      } else {
+        navbarc.classList.remove("sticky");
+      }
+    }
+      init()
+      function init(){
+        var url = "https://api.covid19api.com/summary"
+        var data = ''
+        $.get(url, function(data){
+          console.log(data.Countries[76])
+          data=`
+          <td>${data.Countries[76].TotalConfirmed}</td>
+          <td>${data.Countries[76].TotalDeaths}</td>
+          <td>${data.Countries[76].TotalRecovered}</td>
+          `
+          $("#data").html(data)
+        })
+      }
+    function refreshData() {
+        clearData()
+        init()
+      }
+      function clearData() {
+        $("#data").empty()
+      }
+
+      init3()
+      function init3(){
+        var url = "https://api.covid19api.com/summary"
+        var data = ''
+        $.get(url, function(data){
+          console.log(data.Countries[76])
+          data=`
+          <td>${data.Countries[76].NewConfirmed}</td>
+          <td>${data.Countries[76].NewDeaths}</td>
+          <td>${data.Countries[76].NewRecovered}</td>
+          `
+          $("#data3").html(data)
+        })
+      }
+    function refreshData3() {
+        clearData3()
+        init3()
+      }
+      function clearData3() {
+        $("#data3").empty()
+      }
+
+      init2()
+      function init2(){
+        var url = "https://api.covid19api.com/summary"
+        var data = ''
+        $.get(url, function(data){
+          console.log(data.Global)
+          data=`
+          <td>${data.Global.TotalConfirmed}</td>
+          <td>${data.Global.TotalDeaths}</td>
+          <td>${data.Global.TotalRecovered}</td>
+          `
+          $("#data2").html(data)
+        })
+      }
+    function refreshData2() {
+        clearData2()
+        init2()
+      }
+      function clearData2() {
+        $("#data2").empty()
+      }
+
+      init4()
+      function init4(){
+        var url = "https://api.covid19api.com/summary"
+        var data = ''
+        $.get(url, function(data){
+          console.log(data.Global)
+          data=`
+          <td>${data.Global.NewConfirmed}</td>
+          <td>${data.Global.NewDeaths}</td>
+          <td>${data.Global.NewRecovered}</td>
+          `
+          $("#data4").html(data)
+        })
+      }
+    function refreshData4() {
+        clearData4()
+        init4()
+      }
+      function clearData4() {
+        $("#data4").empty()
+      }
+
+  </script>
+
+</body>
+</html>

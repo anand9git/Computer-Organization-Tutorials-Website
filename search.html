@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Searching Algorithm in 8085 assembly language</title>
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		<a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row" style="background-image: url('bkgi.jpg'); padding-left: 200px; background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+      <div>
+        <h1 style="padding-left: 210px; padding-top: 30px; color: white;"id="algo">Searching Algorithm in 8085 Assembly Language</h1>
+      </div>
+		<div class="side">
+      <div class="dropdown">
+            <button onclick="window.location.href='sort.html'" class="dropbtn">Sorting Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="sort.html#algo">Algorithm</a>
+              <a href="sort.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='search.html'" class="dropbtn">Searching Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="search.html#algo">Algorithm</a>
+              <a href="search.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='multiply.html'" class="dropbtn">Matrix Multiplication Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="multiply.html#">Algorithm</a>
+              <a href="multiply.html#">Simulator</a>
+            </div>
+        </div>
+		</div>
+		<div class="content" style="padding-left: 140px; width: 1200px; color: white;">
+      <br>
+      <p >To perform binary search, the array must be sorted. We are taking the lower limit into L and upper limit into H. The array location is stored at DE register pair. The mid is calculated using (H + L)/2. To perform this division, we are just shifting it to the right one time. Then put the mid value into D and check the item located using DE. if the number is same, then jump to end and store 1 at 0101H. This indicates that item is found, and also store the mid value as index. If the mid is not matched, then there are two case, if the number is smaller than the mid element, then it is in the lower half, so the upper limit will be mid – 1, in another case it will be in the other side, so the lower limit will be mid + 1. If the item is not found it will store 02 at location 0101H.</p>
+      <p>Here Data can be added using the following set of instructions at any place after 0100H, In this code the key element to be searched is stored at 0100H.</p>
+      <br>
+      <table class="table table-hover" style="border-style: solid; background-color: #bfbfbf; table-layout: auto; width: 1050px;">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Mnemonics</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0000H</td>
+            <td>MVI A, F8</td>          
+            <td>Here, F8 in hexadecimal is stored in the accumulator</td>
+          </tr>
+          <tr>
+            <td>0002H</td>
+            <td>STA 0110H</td>
+            <td>The value F8, which was stored in accumulator is now stored at the address 0110H in memory</td>
+          </tr>
+          <tr>
+            <td>0005H</td>
+            <td>MVI A, 04</td>          
+            <td>Here, 04 in hexadecimal is stored in the accumulator</td>
+          </tr>
+          <tr>
+            <td>0007H</td>
+            <td>STA 0100H</td>
+            <td>The value 04 is stored in accumulator as key</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <p>The algorithm can be given as:</p>
+			<table class="table table-hover" style="border-style: solid; background-color: #bfbfbf; table-layout: auto; width: 1050px;">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Labels</th>
+            <th>Mnemonics</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0000</td>
+            <td></td>
+            <td>LDA 0100H</td>
+            <td>Load the Key(to be searched) into A</td>
+          </tr>
+          <tr>
+            <td>0003</td>
+            <td></td>
+            <td>MOV B,A</td>
+            <td>Store the Key into B</td>
+          </tr>
+          <tr>
+            <td>0004</td>
+            <td></td>
+            <td>XRA A</td>
+            <td>Clear A</td>
+          </tr>
+          <tr>
+            <td>0005</td>
+            <td></td>
+            <td>STA 010H</td>
+            <td>Store the number of iterations in 0103H</td>
+          </tr>
+          <tr>
+            <td>0008</td>
+            <td></td>
+            <td>MOV L,A</td>
+            <td>Store A in L</td>
+          </tr>
+          <tr>
+            <td>0009</td>
+            <td></td>
+            <td>MVI H, 09</td>
+            <td>Load 9 into H, This is done as I have assumed array to be of length 10</td>
+          </tr>
+          <tr>
+            <td>000B</td>
+            <td>START</td>
+            <td>LDA 0103H</td>
+            <td>Load the number of iterations into A</td>
+          </tr>
+          <tr>
+            <td>000E</td>
+            <td></td>
+            <td>INR A</td>
+            <td>Increment A</td>
+          </tr>
+          <tr>
+            <td>000F</td>
+            <td></td>
+            <td>STA 0103H</td>
+            <td>Restore the number of iterations</td>
+          </tr>
+          <tr>
+            <td>0012</td>
+            <td></td>
+            <td>MOV A, H</td>
+            <td>Move Upper Limit from H into A</td>
+          </tr>
+          <tr>
+            <td>0013</td>
+            <td></td>
+            <td>CMP L</td>
+            <td>Compare A and L</td>
+          </tr>
+          <tr>
+            <td>0014</td>
+            <td></td>
+            <td>JC NOTFOUND</td>
+            <td>If carry=1, jump to NOTFOUND</td>
+          </tr>
+          <tr>
+            <td>0017</td>
+            <td></td>
+            <td>ADD L</td>
+            <td>Add L to A</td>
+          </tr>
+          <tr>
+            <td>0018</td>
+            <td></td>
+            <td>RAR</td>
+            <td>Divide A by 2 by rotation to right</td>
+          </tr>
+          <tr>
+            <td>0019</td>
+            <td></td>
+            <td>MOV C, A</td>
+            <td>Store mid value into C</td>
+          </tr>
+          <tr>
+            <td>001A</td>
+            <td></td>
+            <td>JNC RESET</td>
+            <td>If carry=0, jump to RESET</td>
+          </tr>
+          <tr>
+            <td>001D</td>
+            <td></td>
+            <td>CMC</td>
+            <td>Complement the Carry</td>
+          </tr>
+          <tr>
+            <td>001E</td>
+            <td>RESET</td>
+            <td>LXI D, 0110H</td>
+            <td>Load the initial address of array in DE pair</td>
+          </tr>
+          <tr>
+            <td>0021</td>
+            <td></td>
+            <td>ADD E</td>
+            <td>Add E to mid</td>
+          </tr>
+          <tr>
+            <td>0022</td>
+            <td></td>
+            <td>MOV E, A</td>
+            <td>Store index at E</td>
+          </tr>
+          <tr>
+            <td>0023</td>
+            <td></td>
+            <td>XRA A</td>
+            <td>Clear Accumulator</td>
+          </tr>
+          <tr>
+            <td>0024</td>
+            <td></td>
+            <td>ADC D</td>
+            <td>Add D to A with carry</td>
+          </tr>
+          <tr>
+            <td>0025</td>
+            <td></td>
+            <td>MOV D, A</td>
+            <td>Restore A into D</td>
+          </tr>
+          <tr>
+            <td>0026</td>
+            <td></td>
+            <td>LDAX D</td>
+            <td>Load A with the value of mid position</td>
+          </tr>
+          <tr>
+            <td>0027</td>
+            <td></td>
+            <td>CMP B</td>
+            <td>Compare it with key</td>
+          </tr>
+          <tr>
+            <td>0028</td>
+            <td></td>
+            <td>JC ELSE</td>
+            <td>If carry=1, jump to ELSE</td>
+          </tr>
+          <tr>
+            <td>002B</td>
+            <td></td>
+            <td>JZ PRINT</td>
+            <td>If zero flag is set jump to PRINT</td>
+          </tr>
+          <tr>
+            <td>002E</td>
+            <td></td>
+            <td>MOV A, C</td>
+            <td>Take mid from C to A</td>
+          </tr>
+          <tr>
+            <td>002F</td>
+            <td></td>
+            <td>DCR A</td>
+            <td>Decrement A</td>
+          </tr>
+          <tr>
+            <td>0030</td>
+            <td></td>
+            <td>MOV H, A</td>
+            <td>Update the Upper Limit to A-1</td>
+          </tr>
+          <tr>
+            <td>0031</td>
+            <td></td>
+            <td>JMP START</td>
+            <td>Jump to Start</td>
+          </tr>
+          <tr>
+            <td>0034</td>
+            <td>ELSE</td>
+            <td>MOV A, C</td>
+            <td>Load the mid from C to A</td>
+          </tr>
+          <tr>
+            <td>0035</td>
+            <td></td>
+            <td>INR A</td>
+            <td>Increment A</td>
+          </tr>
+          <tr>
+            <td>0036</td>
+            <td></td>
+            <td>MOV L, A</td>
+            <td>Update Lower Limit with L + 1</td>
+          </tr>
+          <tr>
+            <td>0037</td>
+            <td></td>
+            <td>JMP START</td>
+            <td>Jump to Start</td>
+          </tr>
+          <tr>
+            <td>003A</td>
+            <td>PRINT</td>
+            <td>MVI A, 01</td>
+            <td>Load 01 as item in found</td>
+          </tr>
+          <tr>
+            <td>003C</td>
+            <td></td>
+            <td>STA 0101H</td>
+            <td>Store the result at 0101H</td>
+          </tr>
+          <tr>
+            <td>003F</td>
+            <td></td>
+            <td>MOV A, C</td>
+            <td>Take the mid from C to A</td>
+          </tr>
+          <tr>
+            <td>0040</td>
+            <td></td>
+            <td>STA 0102H</td>
+            <td>Store the index of Key into 0102H</td>
+          </tr>
+          <tr>
+            <td>0043</td>
+            <td></td>
+            <td>JMP END</td>
+            <td>End the task</td>
+          </tr>
+          <tr>
+            <td>0046</td>
+            <td>NOTFOUND</td>
+            <td>MVI A, 02</td>
+            <td>Load the 02 into A to indicate that key is not present</td>
+          </tr>
+          <tr>
+            <td>0048</td>
+            <td></td>
+            <td>STA 0101H</td>
+            <td>Store the result at 0102H</td>
+          </tr>
+          <tr>
+            <td>004B</td>
+            <td>END</td>
+            <td>HLT</td>
+            <td>Terminate the program</td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br><br>
+      <h2 style="padding-left: 140px; color: white;" id="sim">You can try the same in the simulator below:</h2>
+      <br><br><br>
+     <iframe width="1050" height="800" allowfullscreen="allowfullscreen" frameborder="0" src="https://www.sim8085.com/"></iframe><br><br><br>
+   </div>
+ </div>
+ <script>
+    window.onscroll = function() {myFunction()};
+
+    var navbarc = document.getElementById("navbarc");
+    var sticky = navbarc.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbarc.classList.add("sticky")
+    } else {
+      navbarc.classList.remove("sticky");
+    }
+  }
+</script>
+	<footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top: 10px; text-align: left;">Reach us</h4>
+  </footer>
+</body>
+</html>

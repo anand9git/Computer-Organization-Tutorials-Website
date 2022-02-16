@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Matrix Multiplication Algorithm in 8085 assembly language</title>
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		<a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row" style="background-image: url('bkgi.jpg'); 
+  padding-left: 200px; background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-size: 100% 100%;">
+    <div>
+      <h1 style="padding-left: 240px; padding-top: 30px; color: white;" id="algo">Matrix Multiplication Algorithm in 8085 Assembly Language</h1>
+    </div>
+		<div class="side">
+      <div class="dropdown">
+            <button onclick="window.location.href='sort.html'" class="dropbtn">Sorting Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="sort.html#algo">Algorithm</a>
+              <a href="sort.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='search.html'" class="dropbtn">Searching Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="search.html#algo">Algorithm</a>
+              <a href="search.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='multiply.html'" class="dropbtn">Matrix Multiplication Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="multiply.html#algo">Algorithm</a>
+              <a href="multiply.html#sim">Simulator</a>
+            </div>
+        </div>
+		</div>
+		<div class="content" style="padding-left: 150px; width: 1200px; color: white">
+      <br>
+			<p>Before multiplying two matrices in the 8085 Microprocessor, let's take a look at multiplication of two 8-bit numbers in 8085 as no predefined multiplication subroutine exists here, already. The result is stored at location 3050H and 3051H.</p>
+      <table class="table table-hover" style="border-style: solid; background-color: #bfbfbf; table-layout: auto; width: 1050px;">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Mnemonics</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2000H</td>
+            <td>LHLD 2050H</td>          
+            <td>The content of 2051H is loaded in H and that of 2050H in L register</td>
+          </tr>
+          <tr>
+            <td>2003H</td>
+            <td>XCHG</td>
+            <td>Swaps the values of HL and DE register pairs</td>
+          </tr>
+          <tr>
+            <td>2004H</td>
+            <td>MOV C, D</td>          
+            <td>Loads the content of D in C register</td>
+          </tr>
+          <tr>
+            <td>2005H</td>
+            <td>MVI D, 00</td>
+            <td>Assigns 0 value to D register</td>
+          </tr>
+          <tr>
+            <td>2007H</td>
+            <td>LXI H, 0000</td>
+            <td>Loads 00 value to H and L</td>
+          </tr>
+          <tr>
+            <td>200AH</td>
+            <td>DAD D</td>
+            <td>Assigns the sum of HL and DE pairs to HL pair</td>
+          </tr>
+          <tr>
+            <td>200BH</td>
+            <td>DCR C</td>
+            <td>Decrement C register by 1</td>
+          </tr>
+          <tr>
+            <td>200CH</td>
+            <td>JNZ 200AH</td>
+            <td>If zero flag is not set jump to 2000H</td>
+          </tr>
+          <tr>
+            <td>200FH</td>
+            <td>SHLD 3050H</td>
+            <td>Stores the value at H to 3051H address and the value in L to 3050H memory address</td>
+          </tr>
+          <tr>
+            <td>2012H</td>
+            <td>HLT</td>
+            <td>Terminates the program</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <p style="color: white;">Now, we can use this subroutine to perform matrix multiplcation for 1xN with Nx1 and 2x2 with 2x2 matrices. For generalised matrix multiplication for MxN with NxP, we would have to use stacks or have more than 4 registers in the microprocessor. The use of stacks hinders our ability to use the HL register pair and we may loose the value stored in the HL pair due to previous multiplications and addition operations.</p>
+      <p>Here, the matrices are stored at addresses 0200H and 0300H respectively, both are 2x2 matrices and result matrix is stored at 0600H. Hence, the algorithm may be given as:</p>
+      <table class="table table-hover" style="border-style: solid; background-color: #bfbfbf; table-layout: auto; width: 1050px;">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Label</th>
+            <th>Mnemonics</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0100H</td>
+            <td></td>
+            <td>LXI H,0200H</td>          
+            <td>The adress of matrix 1 is stored in HL pair</td>
+          </tr>
+          <tr>
+            <td>0103H</td>
+            <td></td>
+            <td>LXI D, 0300H</td>
+            <td>The adress of matrix 2 is stored in DE pair</td>
+          </tr>
+          <tr>
+            <td>0106H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Multiply subroutine is called</td>
+          </tr>
+          <tr>
+            <td>0109H</td>
+            <td></td>
+            <td>STA 0500H</td>          
+            <td>Product is stored at 0500H</td>
+          </tr>
+          <tr>
+            <td>010CH</td>
+            <td></td>
+            <td>INX H</td>          
+            <td>Increment HL pair for getting the next value of matrix 1</td>
+          </tr>
+          <tr>
+            <td>010DH</td>
+            <td></td>
+            <td>LXI D, 0302H</td>          
+            <td>Get address of next column element of matrix 2 in DE pair</td>
+          </tr>
+          <tr>
+            <td>0110H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Multiply subroutine is called</td>
+          </tr>
+          <tr>
+            <td>0113H</td>
+            <td></td>
+            <td>STA 0501H</td>          
+            <td>Product is stored at 0500H</td>
+          </tr>
+          <tr>
+            <td>0116H</td>
+            <td></td>
+            <td>LXI H, 0200H</td>          
+            <td>Get address of row element of matrix 1 in HL pair</td>
+          </tr>
+          <tr>
+            <td>0119H</td>
+            <td></td>
+            <td>LXI D, 0301H</td>          
+            <td>Get address of row element of matrix 2 in DE pair</td>
+          </tr>
+          <tr>
+            <td>011CH</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+          <tr>
+            <td>011FH</td>
+            <td></td>
+            <td>STA 0502H</td>          
+            <td>Product is stored at 0502H</td>
+          </tr>
+          <tr>
+            <td>0122H</td>
+            <td></td>
+            <td>INX H</td>          
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>0123H</td>
+            <td></td>
+            <td>LXI D, 0303H</td>          
+            <td>Get address of 2nd row element of matrix 2 in DE pair</td>
+          </tr>
+          <tr>
+            <td>0126H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+          <tr>
+            <td>0129H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+          <tr>
+            <td>012CH</td>
+            <td></td>
+            <td>STA 0503H</td>          
+            <td>Store Product in 0503H</td>
+          </tr>
+          <tr>
+            <td>012FH</td>
+            <td></td>
+            <td>LXI H, 0202H</td>          
+            <td>Load address of matrix 1 element in HL pair</td>
+          </tr>
+          <tr>
+            <td>0132H</td>
+            <td></td>
+            <td>LXI D, 0300H</td>          
+            <td>Load address of matrix 2 element in DE pair</td>
+          </tr>
+          <tr>
+            <td>0135H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+          <tr>
+            <td>0138H</td>
+            <td></td>
+            <td>STA 0504H</td>          
+            <td>Store product at 0504H</td>
+          </tr>
+          <tr>
+            <td>013BH</td>
+            <td></td>
+            <td>INX H</td>          
+            <td>Increment address of HL pair</td>
+          </tr>
+          <tr>
+            <td>013CH</td>
+            <td></td>
+            <td>LXI D, 0302H</td>          
+            <td>Load value at address 0302H in DL pair</td>
+          </tr>
+          <tr>
+            <td>013FH</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+           <tr>
+            <td>0142H</td>
+            <td></td>
+            <td>STA 0505H</td>          
+            <td>Store product in 0505H</td>
+          </tr>
+           <tr>
+            <td>0145H</td>
+            <td></td>
+            <td>LXI H, 0202H </td>          
+            <td>Load value at 0202H in HL pair</td>
+          </tr>
+           <tr>
+            <td>0148H</td>
+            <td></td>
+            <td>LXI D, 0301H</td>          
+            <td>Load value at 0301H in DE pair</td>
+          </tr>
+           <tr>
+            <td>014BH</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+           <tr>
+            <td>014EH</td>
+            <td></td>
+            <td>STA 0506H</td>          
+            <td>Store product at 0506H</td>
+          </tr>
+           <tr>
+            <td>0151H</td>
+            <td></td>
+            <td>INX H</td>          
+            <td>Increment HL pair</td>
+          </tr>
+           <tr>
+            <td>0152H</td>
+            <td></td>
+            <td>LXI D, 0303H</td>          
+            <td>Load value at 0303H in DL pair</td>
+          </tr>
+           <tr>
+            <td>0155H</td>
+            <td></td>
+            <td>CALL MUL</td>          
+            <td>Call Multiply subroutine</td>
+          </tr>
+           <tr>
+            <td>0158H</td>
+            <td></td>
+            <td>STA 0507H</td>          
+            <td>Store Product at 0507H</td>
+          </tr>
+           <tr>
+            <td>015AH</td>
+            <td></td>
+            <td>CALL ADD</td>          
+            <td>Call addition label</td>
+          </tr>
+          <tr>
+            <td>015DH</td>
+            <td></td>
+            <td>HLT</td>          
+            <td>Terminate the Program</td>
+          </tr>
+          <tr>
+            <td>015EH</td>
+            <td>MUL</td>
+            <td>MOV A, M</td>          
+            <td>Move value at the address stored in HL pair to Accumulator</td>
+          </tr>
+          <tr>
+            <td>015FH</td>
+            <td></td>
+            <td>MOV C, A</td>          
+            <td>Move value in accumulator to C register</td>
+          </tr>
+          <tr>
+            <td>0160H</td>
+            <td></td>
+            <td>LDAX D</td>          
+            <td>Load value at address stored in DE pair to the accumulator</td>
+          </tr>
+          <tr>
+            <td>0161H</td>
+            <td></td>
+            <td>MOV B, A</td>          
+            <td>Move contents from A to B register</td>
+          </tr>
+          <tr>
+            <td>0162H</td>
+            <td></td>
+            <td>MVI A, 00</td>          
+            <td>Clear accumulator</td>
+          </tr>
+          <tr>
+            <td>0164H</td>
+            <td>L1</td>
+            <td>ADD B</td>          
+            <td>Add B to A and store in A</td>
+          </tr>
+          <tr>
+            <td>0165H</td>
+            <td></td>
+            <td>DCR C</td>          
+            <td>Decrement C register</td>
+          </tr>
+          <tr>
+            <td>0166H</td>
+            <td></td>
+            <td>JNZ L1</td>          
+            <td>Jump if not zero to L1 Label</td>
+          </tr>
+          <tr>
+            <td>016FH</td>
+            <td></td>
+            <td>RET</td>
+            <td>Return to the next instruction</td>
+          </tr>
+          <tr>
+            <td>0170H</td>
+            <td>ADD</td>
+            <td>LXI H, 0500H</td>
+            <td>Load value at 0500H in HL pair</td>
+          </tr>
+          <tr>
+            <td>0173H</td>
+            <td></td>
+            <td>MOV A, M</td>
+            <td>Move value stored in address at HL pair to accumulator</td>
+          </tr>
+          <tr>
+            <td>0174H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>0175H</td>
+            <td></td>
+            <td>ADD M</td>
+            <td>Add value to accumulator</td>
+          </tr>
+          <tr>
+            <td>0176H</td>
+            <td></td>
+            <td>STA 0600H</td>
+            <td>First value of result matrix is stored at 0600H</td>
+          </tr>
+          <tr>
+            <td>0179H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>017AH</td>
+            <td></td>
+            <td>MOV A, M</td>
+            <td>Move value stored in address at HL pair to accumulator</td>
+          </tr>
+          <tr>
+            <td>017BH</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>017CH</td>
+            <td></td>
+            <td>ADD M</td>
+            <td>Add value to accumulator</td>
+          </tr>
+          <tr>
+            <td>017DH</td>
+            <td></td>
+            <td>STA 0601H</td>
+            <td>Second value of result matrix is stored at 0601H</td>
+          </tr>
+          <tr>
+            <td>0180H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>0181H</td>
+            <td></td>
+            <td>ADD M</td>
+            <td>Add value to accumulator</td>
+          </tr>
+          <tr>
+            <td>0182H</td>
+            <td></td>
+            <td>STA 0602H</td>
+            <td>Third value of result matrix is stored at 0602H</td>
+          </tr>
+          <tr>
+            <td>0185H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>0186H</td>
+            <td></td>
+            <td>ADD M</td>
+            <td>Add value to accumulator</td>
+          </tr>
+          <tr>
+            <td>0187H</td>
+            <td></td>
+            <td>STA 0603H</td>
+            <td>Last value of result matrix is stored at 0603H</td>
+          </tr>
+          <tr>
+            <td>018AH</td>
+            <td></td>
+            <td>RET</td>
+            <td>Return</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h2 style="padding-left: 140px;" id="sim">You can try the same in the simulator below:</h2>
+      <br><br><br>
+     <iframe width="1050" height="800" frameborder="0" src="https://www.sim8085.com/"></iframe><br><br><br>
+		</div>
+	</div>
+  <script>
+    window.onscroll = function() {myFunction()};
+
+    var navbarc = document.getElementById("navbarc");
+    var sticky = navbarc.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbarc.classList.add("sticky")
+    } else {
+      navbarc.classList.remove("sticky");
+    }
+  }
+</script>
+	<footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top: 10px; text-align: left;">Reach us</h4>
+  </footer>
+</body>
+</html>

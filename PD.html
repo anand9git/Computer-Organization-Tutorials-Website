@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Processor Design</title>
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		<a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row">
+    <div>
+      <h1 style="padding-left: 490px; padding-top: 30px; color: white" id="ic">PROCESSOR DESIGN</h1>
+    </div>
+		<div class="side">
+		   <div class="dropdown">
+            <button onclick="window.location.href='GSA.html'" class="dropbtn">General System Architecture
+              <i style="padding-left: 10px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="GSA.html#bo">Basic Computer Organization</a>
+              <a href="GSA.html#vn">Von Neumann Architecture</a>
+              <a href="GSA.html#fc">Flynn's Classification of Computer Architecture</a>
+              <a href="GSA.html#mo">Micro Operations and Control Signals</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='PD.html'" class="dropbtn">Processor Design
+              <i style="padding-left: 10px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="PD.html#ic">Instuction Cycle</a>
+              <a href="PD.html#so">Stack Organisation</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='CA.html'" class="dropbtn">Computer Arithmetic
+              <i style="padding-left: 10px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="CA.html#um">Unsigned Multiplication</a>
+              <a href="CA.html#sm">Signed Multiplication</a>
+              <a href="CA.html#rd">Restoring Division</a>
+              <a href="CA.html#nd">Non-Restoring Division</a>
+              <a href="CA.html#fp">Floating Point Numbers</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='CD.html'" class="dropbtn">Control Design
+              <i style="padding-left: 10px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="CD.html#stm">State Table Method</a>
+              <a href="CD.html#dem">Delay Element Method</a>
+              <a href="CD.html#scm">Sequence Counter Method</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='IO.html'" class="dropbtn">I/O Design and Memory Hierarchy
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="IO.html#ihm">Interrupt Handling Mechanism</a>
+              <a href="IO.html#ti">Types of Interrupts</a>
+              <a href="IO.html#mh">Memory Hierarchy</a>
+              <a href="IO.html#dma">Direct Memory Access</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button onclick="window.location.href='IP.html'" class="dropbtn">Introduction to Parallelism
+              <i style="padding-left: 10px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="IP.html#pc">Parallel Computing</a>
+              <a href="IP.html#tp">Types of Parallelism</a>
+              <a href="IP.html#p">Pipelining</a>
+            </div>
+        </div>
+  	</div>
+        <div class="content" style="padding-top: 30px;">
+          <img class="image" src="18.jpg"><br><br><br>
+          <img class="image" src="19.jpg"><br><br><br>
+          <img class="image" src="20.jpg">
+          <img class="image"  src="21.jpg"><br><br><br>
+           <iframe id="so"class="video" width="1000" height="400" allowfullscreen="allowfullscreen" frameborder="0" src="https://www.youtube.com/embed/kX8ouaGKJQc"></iframe><br><br>
+          <img class="image" src="21a.jpg"><br><br><br>
+          <h2 style="text-align: center; color: white">For further information refer to:</h2>
+          <iframe class="video" width="1000" height="400" allowfullscreen="allowfullscreen" frameborder="0" src="https://www.youtube.com/embed/be9q_9Hcips"></iframe><br><br><br><br><br>
+        </div>
+		</div>
+    <script>
+    window.onscroll = function() {myFunction()};
+
+    var navbarc = document.getElementById("navbarc");
+    var sticky = navbarc.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbarc.classList.add("sticky")
+    } else {
+      navbarc.classList.remove("sticky");
+    }
+  }
+</script>
+	<footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top: 10px; text-align: left;">Reach us</h4>
+  </footer>
+</body>
+</html>

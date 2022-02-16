@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Us</title>
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		<a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row" style="background-image: url('conbkg.jpg'); padding-left: 100px; background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+    <div>
+      <h1 style="padding-left: 530px;padding-top: 30px;  color: white">Contact Us</h1>
+      <br>
+      <br>
+    </div>
+  </div>
+  <div class="conus" style="color: white; padding-left: 490px; padding-top: 30px;">
+    <br>
+    <form action="results.html" method="GET">
+        <div>
+          <span style="float: left; float: top; padding-right: 20px; padding-bottom: 20px;" >
+            <div>
+              <label for="firstname">First Name:</label>
+            </div>
+            <div>
+              <input name="firstname" id="firstname" type="text" placeholder="Your first name" style="width: 220px;" required="">
+            </div>
+          </span>
+          <span style="float: right; float: top; padding-bottom: 20px;">
+            <div>
+              <label for="lastname">Last Name:</label>
+            </div>
+            <div>
+              <input name="lastname" id="lastname" type="text" placeholder="Your last name" style="width: 220px;">
+            </div>
+          </span>
+        </div>
+
+        <div style="padding-bottom: 20px;">
+            <div>
+              <label for="email">Email:</label>
+            </div>
+            <div>
+              <input id="email" type="Email" placeholder="Your Email" style="width: 460px;" required="">
+            </div>
+        </div>
+
+
+        <div style="padding-bottom: 20px;">
+          <div>
+            <label for="subject">Subject:</label>
+          </div>
+          <div>
+            <input type="text" id="subject" placeholder="Subject" style="width: 460px;">
+          </div>
+        </div>
+
+
+        <div style="padding-bottom: 20px;">
+          <div>
+            <label for="message">Message:</label>
+          </div>
+          <div>
+            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px; width: 460px;" required=""></textarea>
+          </div>
+        </div>
+
+        <div style="padding-left: 180px; padding-top: 20px;">
+          <button>SUBMIT</button>
+        </div>
+        <br>
+      <br>
+      <br><br>
+      <br>
+      <br>
+      <br>
+      </form>
+
+    </div>
+
+    <script>
+      window.onscroll = function() {myFunction()};
+
+    var navbarc = document.getElementById("navbarc");
+    var sticky = navbarc.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbarc.classList.add("sticky")
+    } else {
+      navbarc.classList.remove("sticky");
+    }
+  }
+    </script>
+		<footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top:10px; text-align: left;">Reach us</h4>
+  </footer>
+</body>
+</html>
