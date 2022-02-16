@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sorting Algorithm in 8085 assembly language</title>
+	<link rel="stylesheet" type="text/css" href="homepage_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+</head>
+<body>
+	<div id="navbarc" class="navbarc">
+		<a href="Homepage.html" id="home">Home</a>
+  		<a href="aboutme.html" class="right">About Us</a>
+  		<a href="conme.html" class="right">Contact Us</a>
+      <a href="GSA.html" class="right"><i class="fa fa-book" aria-hidden="true"></i></a>
+      <a href="covid.html" class="right"><i class="fa fa-user-md" aria-hidden="true"></i></a>
+      <a href="sort.html" class="right"><i class="fa fa-code" aria-hidden="true"></i></a>
+	</div>
+	<div class="row" style="background-image: url('bkgi.jpg'); 
+  padding-left: 200px; background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+    <div>
+      <h1 style="padding-left: 240px; padding-top: 30px; color: white">Sorting Algorithm in 8085 Assembly Language</h1>
+    </div>
+		<div class="side">
+      <div class="dropdown">
+            <button onclick="window.location.href='sort.html'" class="dropbtn">Sorting Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="sort.html#algo">Algorithm</a>
+              <a href="sort.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='search.html'" class="dropbtn">Searching Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="search.html#algo">Algorithm</a>
+              <a href="search.html#sim">Simulator</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="window.location.href='multiply.html'" class="dropbtn">Matrix Multiplication Algorithm in 8085 assembly language
+              <i style="padding-left: 5px;" class="fa fa-caret-right"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="multiply.html#algo">Algorithm</a>
+              <a href="multiply.html#sim">Simulator</a>
+            </div>
+        </div>
+	 		</div>
+		<div class="content"id="algo" style="padding-left: 150px; padding-top: 30px; width: 1200px; color: white">
+      <p>This is the algorithm for bubble sort in 8085 assembly language. Here, the size of the list is to be stored by the user at 0040H, and the contents of the list form 0041H. The sorted list will be printed at the same memory location in sorted after the complete execution of the algorithm. The algorithm is given as follows:</p>
+      <br>
+      <table class="table table-hover" style="border-style: solid; border-style: solid; background-color: #bfbfbf; table-layout: auto; width: 1050px;">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Label</th>
+            <th>Mnemonics</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0000H</td>
+            <td>START</td>
+            <td>LXI H, 0040H</td>          
+            <td>Load the address where the size of the list is stored in the HL pair</td>
+          </tr>
+          <tr>
+            <td>0003H</td>
+            <td></td>
+            <td>MVI D, 00</td>
+            <td>Initialize 00 to D register</td>
+          </tr>
+          <tr>
+            <td>0005H</td>
+            <td></td>
+            <td>MOV C, M</td>          
+            <td></td>
+          </tr>
+          <tr>
+            <td>0006H</td>
+            <td></td>
+            <td>DCR C</td>
+            <td>Decrement C register</td>
+          </tr>
+          <tr>
+            <td>0007H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+          <tr>
+            <td>0008H</td>
+            <td>CHECK</td>
+            <td>MOV A, M</td>
+            <td>Load the element in the accumulator</td>
+          </tr>
+          <tr>
+            <td>0009H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Increment HL pair</td>
+          </tr>
+           <tr>
+            <td>000AH</td>
+            <td></td>
+            <td>CMP M</td>
+            <td>Compare accumulator and the next element</td>
+          </tr>
+           <tr>
+            <td>000BH</td>
+            <td></td>
+            <td>JC NEXT</td>
+            <td>If accumulator is less, then carry flag is set and NEXT label is reaches</td>
+          </tr>
+           <tr>
+            <td>000EH</td>
+            <td></td>
+            <td>MOV B, M</td>
+            <td>Swaping is done, otherwise</td>
+          </tr>
+           <tr>
+            <td>000FH</td>
+            <td></td>
+            <td>MOV M, A</td>
+            <td>Swapping</td>
+          </tr>
+           <tr>
+            <td>0010H</td>
+            <td></td>
+            <td>DCX H</td>
+            <td>Swapping</td>
+          </tr>
+           <tr>
+            <td>0011H</td>
+            <td></td>
+            <td>MOV M, B</td>
+            <td>Incr</td>
+          </tr>
+           <tr>
+            <td>0012H</td>
+            <td></td>
+            <td>INX H</td>
+            <td>Incr</td>
+          </tr>
+           <tr>
+            <td>00013H</td>
+            <td></td>
+            <td>MVI D, 01</td>
+            <td>01 is stored to remember that exchange was taken place</td>
+          </tr>
+           <tr>
+            <td>0015H</td>
+            <td>NEXT</td>
+            <td>DCR C</td>
+            <td>Decrement C</td>
+          </tr>
+           <tr>
+            <td>0016H</td>
+            <td></td>
+            <td>JNZ CHECK</td>
+            <td>Check if the lenght of the array is traversed or not</td>
+          </tr>
+           <tr>
+            <td>0019H</td>
+            <td></td>
+            <td>MOV A, D</td>
+            <td>Move contents of D in accumulator</td>
+          </tr>
+           <tr>
+            <td>001AH</td>
+            <td></td>
+            <td>CPI 01</td>
+            <td>Compare accumulator contents with 01</td>
+          </tr>
+           <tr>
+            <td>001CH</td>
+            <td></td>
+            <td>JZ START</td>
+            <td>Jump to start if D=01H</td>
+          </tr>
+           <tr>
+            <td>001FH</td>
+            <td></td>
+            <td>HLT</td>
+            <td>Terminate the program</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+			<br><br>
+      <h2 style="padding-left: 140px; color: white" id="sim">You can try the same in the simulator below:</h2>
+      <br><br>
+     <iframe width="1050" height="800" allowfullscreen="allowfullscreen" frameborder="0" src="https://www.sim8085.com/"></iframe><br><br><br>
+		</div>
+	</div>
+  <script>
+    window.onscroll = function() {myFunction()};
+
+    var navbarc = document.getElementById("navbarc");
+    var sticky = navbarc.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbarc.classList.add("sticky")
+    } else {
+      navbarc.classList.remove("sticky");
+    }
+  }
+</script>
+  <footer>
+    <div style="float: right; padding-right: 600px;">
+      <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+      <a href="https://www.twitter.com/" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" class="fa fa-youtube"></a>
+      <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+    </div>
+    <h4 style="color: white; padding-left: 20px; padding-top: 10px;text-align: left;">Reach us</h4>
+  </footer>
+	</body>
+</html>
